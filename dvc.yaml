@@ -1,1 +1,17 @@
-# DVC pipeline orchestration
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - data/raw/application_train.csv
+    - src/prepare.py
+    outs:
+    - data/interim/application_masked.csv
+  featurize:
+    cmd: python src/featurize.py
+    deps:
+    - data/interim/application_masked.csv
+    - data/raw/bureau.csv
+    - data/raw/installments_payments.csv
+    - src/featurize.py
+    outs:
+    - data/processed/train_final.csv
