@@ -1,0 +1,13 @@
+# Environments
+.env
+venv/
+__pycache__/
+
+# MLflow
+/mlruns/
+
+# IDE files
+.vscode/
+.idea/
+
+# Note: We let DVC handle the data/ and models/ gitignores automatically!
