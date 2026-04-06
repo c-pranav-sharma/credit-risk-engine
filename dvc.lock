@@ -1,0 +1,62 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/raw/application_train.csv
+      hash: md5
+      md5: 793a017f41fbac1dc28176b26dbab30e
+      size: 166133370
+    - path: src/prepare.py
+      hash: md5
+      md5: 88e9202facce72df534e832ea5b0f547
+      size: 1164
+    outs:
+    - path: data/interim/application_masked.csv
+      hash: md5
+      md5: ddc68e258824039018d71a032edde246
+      size: 183284435
+  featurize:
+    cmd: python src/featurize.py
+    deps:
+    - path: data/interim/application_masked.csv
+      hash: md5
+      md5: ddc68e258824039018d71a032edde246
+      size: 183284435
+    - path: data/raw/bureau.csv
+      hash: md5
+      md5: ec0f59a16e7071de66b83217b23bb390
+      size: 170016717
+    - path: data/raw/installments_payments.csv
+      hash: md5
+      md5: 4e9751972d02c376f0e75edbf6c9d07d
+      size: 723118349
+    - path: src/featurize.py
+      hash: md5
+      md5: 991afdac5f7fc5fc527087a329782ebc
+      size: 3427
+    outs:
+    - path: data/processed/train_final.csv
+      hash: md5
+      md5: fa9280093a2b73dcaf83de178a1101e3
+      size: 223950658
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/train_final.csv
+      hash: md5
+      md5: fa9280093a2b73dcaf83de178a1101e3
+      size: 223950658
+    - path: src/train.py
+      hash: md5
+      md5: 7eb54caa98f2379c68b520a2b6e0a6eb
+      size: 5432
+    outs:
+    - path: models/threshold.json
+      hash: md5
+      md5: 6892c0e4713298254d42047242fe5125
+      size: 41
+    - path: reports/interpretability/feature_importance.png
+      hash: md5
+      md5: a0733e8ddb20147888098bcc0db33f0d
+      size: 93471
