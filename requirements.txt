@@ -1,20 +1,11 @@
-# Core ML & Data
 pandas
 numpy
 xgboost
 scikit-learn
-
-# MLOps & Versioning
-dvc
 mlflow
-evidently
-
-# Security & API
 fastapi
-pydantic
 uvicorn
+pydantic
 python-dotenv
-
-# Interpretability
-shap
 matplotlib
+optuna
