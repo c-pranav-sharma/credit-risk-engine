@@ -1,13 +1,14 @@
 # Environments
-.env
 venv/
 __pycache__/
+.env
 
-# MLflow
-/mlruns/
+# Data & Models
+data/
+models/
+reports/
+mlflow.db
+mlruns/
 
-# IDE files
-.vscode/
-.idea/
-
-# Note: We let DVC handle the data/ and models/ gitignores automatically!
+# Git & DVC
+.dvc/

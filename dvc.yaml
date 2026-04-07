@@ -15,3 +15,11 @@ stages:
     - src/featurize.py
     outs:
     - data/processed/train_final.csv
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/processed/train_final.csv
+    - src/train.py
+    outs:
+    - models/threshold.json
+    - reports/interpretability/feature_importance.png

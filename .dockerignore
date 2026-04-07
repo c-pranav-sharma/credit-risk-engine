@@ -1,0 +1,18 @@
+# Environments
+venv/
+__pycache__/
+.env
+
+# Git & DVC
+.git/
+.dvc/
+.dvcignore
+
+# We only need the model, not the massive raw data
+data/raw/
+data/interim/
+data/processed/
+
+# IDE files
+.vscode/
+.idea/
