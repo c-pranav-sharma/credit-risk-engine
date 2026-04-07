@@ -1,0 +1,39 @@
+name: SentinelScore CI/CD Pipeline
+
+# Trigger the automation whenever code is pushed to the main branch
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Run this on a fast Linux cloud server
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip' # Cache dependencies to make the pipeline lightning fast
+
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest httpx # Add testing libraries
+
+    - name: 🧪 Run Engine Sanity Check
+      run: |
+        # Ensure our Python scripts compile correctly without syntax errors
+        python -m py_compile src/train.py
+        python -m py_compile src/main.py
+
+    - name: 🐳 Build Docker Container
+      run: |
+        # Build the image to prove the Dockerfile is completely valid
+        docker build -t sentinelscore-api:test .
